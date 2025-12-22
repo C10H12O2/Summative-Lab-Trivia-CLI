@@ -53,3 +53,12 @@ function startGame() {
 }
 
 function askQuestion() {
+  if (gameOver || currentQuestion >= questions.length) {
+    endGame();
+    return;
+  }
+
+  const q = questions[currentQuestion];
+  console.log(`\nQuestion ${currentQuestion + 1}: ${q.question}`);
+
+  
