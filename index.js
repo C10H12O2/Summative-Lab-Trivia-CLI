@@ -61,4 +61,35 @@ function askQuestion() {
   const q = questions[currentQuestion];
   console.log(`\nQuestion ${currentQuestion + 1}: ${q.question}`);
 
-  
+  q.options.forEach((option, index) => {
+    console.log(`${index + 1}. ${option}`);
+  });
+
+  rl.question("Your answer (1-4): ", (input) => {
+    checkAnswer(input);
+  });
+}
+
+function checkAnswer(input) {
+  const correctAnswer = questions[currentQuestion].answer;
+  if (parseInt(input) - 1 === correctAnswer) {
+    console.log("Correct!");
+    score++;
+  } else {
+    console.log(`Wrong! The correct answer was: ${questions[currentQuestion].options[correctAnswer]}`);
+
+  currentQuestion++;
+  askQuestion();
+}
+}
+
+function endGame() {
+  console.log("The game is over!!!!");
+  console.log(`Your final score is ${score} out of ${questions.length}.`);
+  rl.close();
+}
+
+startGame();
+
+
+
