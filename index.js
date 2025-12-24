@@ -37,13 +37,16 @@ let gameOver = false;
 
 const GAME_TIME = 30000;
 
+let timerId;
+
 function startTimer() {
-  setTimeout(() => {
+  timerId = setTimeout(() => {
     gameOver = true;
-    console.log("\nTime's up!");
+    console.log("sTime's up!");
     endGame();
   }, GAME_TIME);
 }
+
 
 function startGame() {
   console.log("Welcome to the Trivia Game!!!!!");
@@ -71,25 +74,39 @@ function askQuestion() {
   });
 }
 
+const answer = parseInt(input);
+
+if (isNaN(answer) || answer < 1 || answer > q.options.length) {
+  console.log("Please enter a valid number.");
+  askQuestion();
+  return;
+}
+
 function checkAnswer(input) {
   const correctAnswer = questions[currentQuestion].answer;
+
   if (parseInt(input) - 1 === correctAnswer) {
     console.log("Correct!");
     score++;
   } else {
-    console.log(`Wrong! The correct answer was: ${questions[currentQuestion].options[correctAnswer]}`);
-
-    currentQuestion++;
-    askQuestion();
+    console.log(
+      `Wrong! The correct answer was: ${questions[currentQuestion].options[correctAnswer]}`
+    );
   }
+
+  currentQuestion++;
+  askQuestion();
 }
 
+
 function endGame() {
-  clearTimeout(timeerId);
+  clearTimeout(timerId);
   console.log("The game is over!!!!");
   console.log(`Your final score is ${score} out of ${questions.length}.`);
   rl.close();
 }
+
+
 
 startGame();
 
