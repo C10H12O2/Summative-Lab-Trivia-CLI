@@ -1,4 +1,5 @@
-const readline require('readline');
+const { clear } = require('console');
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -78,12 +79,13 @@ function checkAnswer(input) {
   } else {
     console.log(`Wrong! The correct answer was: ${questions[currentQuestion].options[correctAnswer]}`);
 
-  currentQuestion++;
-  askQuestion();
-}
+    currentQuestion++;
+    askQuestion();
+  }
 }
 
 function endGame() {
+  clearTimeout(timeerId);
   console.log("The game is over!!!!");
   console.log(`Your final score is ${score} out of ${questions.length}.`);
   rl.close();
