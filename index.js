@@ -1,4 +1,4 @@
-const { clear } = require('console');
+
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -74,14 +74,6 @@ function askQuestion() {
   });
 }
 
-const answer = parseInt(input);
-
-if (isNaN(answer) || answer < 1 || answer > q.options.length) {
-  console.log("Please enter a valid number.");
-  askQuestion();
-  return;
-}
-
 function checkAnswer(input) {
   const correctAnswer = questions[currentQuestion].answer;
 
@@ -98,16 +90,12 @@ function checkAnswer(input) {
   askQuestion();
 }
 
-
 function endGame() {
   clearTimeout(timerId);
   console.log("The game is over!!!!");
   console.log(`Your final score is ${score} out of ${questions.length}.`);
   rl.close();
 }
-
-
-
 startGame();
 
 
